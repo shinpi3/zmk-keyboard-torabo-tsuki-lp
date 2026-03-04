@@ -39,13 +39,33 @@
         };
 
         mscr {
-            bindings = <&none>;
+            bindings = <&mo 4>;
             key-positions = <33 34 35>;
         };
 
         mscl {
-            bindings = <&none>;
+            bindings = <&mo 4>;
             key-positions = <27 28 26>;
+        };
+
+        ctrlwr {
+            bindings = <&kp LC(W)>;
+            key-positions = <46 47>;
+        };
+
+        ctrlwl {
+            bindings = <&kp LC(W)>;
+            key-positions = <43 42>;
+        };
+
+        mb4r {
+            bindings = <&mkp MB4>;
+            key-positions = <33 35 34 36>;
+        };
+
+        mb4l {
+            bindings = <&mkp MB4>;
+            key-positions = <28 27 26 25>;
         };
     };
 
