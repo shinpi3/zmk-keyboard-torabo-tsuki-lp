@@ -30,22 +30,22 @@
 
         mb3r {
             bindings = <&mkp MB3>;
-            key-positions = <19 8>;
+            key-positions = <19 34>;
         };
 
         mb3l {
             bindings = <&mkp MB3>;
-            key-positions = <16 3>;
+            key-positions = <16 27>;
         };
 
         ctrlwr {
             bindings = <&kp LC(W)>;
-            key-positions = <32 33>;
+            key-positions = <33 34>;
         };
 
         ctrlwl {
             bindings = <&kp LC(W)>;
-            key-positions = <28 29>;
+            key-positions = <28 27>;
         };
 
         mb4r {
