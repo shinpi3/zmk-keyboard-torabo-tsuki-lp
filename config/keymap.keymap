@@ -6,14 +6,14 @@
 / {
     /* --- マウススクロールのカスタム定義 --- */
     behaviors {
+        // 名称を zmk,behavior-pointing-scroll に変更
         pscr: personal_scroll {
-            compatible = "zmk,behavior-mouse-scroll";
+            compatible = "zmk,behavior-pointing-scroll";
             #binding-cells = <1>;
-            /* 感度: 数値を小さく(5)してゆっくりに設定 */
-            /* 方向: x をマイナスにして右操作で右スクロールに反転 */
+            /* 感度: 5（ゆっくり） */
+            /* 方向: x をマイナスにして反転を解消 */
             scroll-vector-x = <(-5)>; 
             scroll-vector-y = <5>;    
-            time-to-max-speed-ms = <400>;
         };
     };
 
@@ -126,24 +126,6 @@
         };
 
         layer_4 {
-            /* スクロールレイヤー */
             bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans                  &trans          &trans          &trans          &trans           &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans                  &trans          &trans          &pscr SCRL_UP   &trans           &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans          &pscr SCRL_LEFT &pscr SCRL_DOWN &pscr SCRL_RIGHT &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans          &trans          &trans          &trans           &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans          &trans          &trans          &trans           &trans  &trans
-            >;
-        };
-
-        layer_5 {
-            bindings = <
-&trans  &trans        &trans        &trans        &trans        &trans                        &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4                  &trans  &trans  &trans  &trans  &trans  &bt BT_CLR_ALL
-&trans  &trans        &trans        &trans        &trans        &trans        &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans        &trans        &trans        &trans        &trans        &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans        &trans        &trans        &trans        &trans        &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-            >;
-        };
-    };
-};
+&trans  &trans  &trans  &trans  &trans  &trans                  &trans           &trans           &trans           &trans            &trans  &trans
+&trans
