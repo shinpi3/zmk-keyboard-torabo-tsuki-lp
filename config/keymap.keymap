@@ -4,6 +4,21 @@
 #include <dt-bindings/zmk/pointing.h>
 
 / {
+    /* --- スクロール挙動のカスタマイズ --- */
+    behaviors {
+        msc: mouse_scroll {
+            compatible = "zmk,behavior-mouse-scroll";
+            #binding-cells = <1>;
+            delay-ms = <0>;
+            /* 感度の調整: 数値を小さくするとゆっくりになります (10 -> 5)
+               方向の反転: x をマイナスにすることで、右操作で右スクロール（反転解消）にします
+            */
+            scroll-vector-x = <(-5)>; 
+            scroll-vector-y = <5>;    
+            time-to-max-speed-ms = <400>;
+        };
+    };
+
     combos {
         compatible = "zmk,combos";
 
@@ -74,11 +89,11 @@
 
         layer_0 {
             bindings = <
-&none      &none         &none  &none  &none         &none                                    &none    &none  &none      &none    &none                 &none
-&kp GRAVE  &kp Q         &kp W  &kp E  &kp R         &kp T                                    &kp Y    &kp U  &kp I      &kp O    &kp P                 &kp LEFT_BRACE
-&kp TAB    &kp A         &kp S  &kp D  &kp F         &kp G        &none        &none          &kp H    &kp J  &kp K      &kp L    &kp SEMI              &kp RIGHT_BRACE
-&kp LSHFT  &kp Z         &kp X  &kp C  &kp V         &kp B        &none        &kp RET        &kp N    &kp M  &kp COMMA  &kp DOT  &mt RIGHT_SHIFT FSLH  &kp BACKSLASH
-&kp LCTRL  &kp LEFT_GUI  &mo 5  &none  &kp LEFT_ALT  &lt 1 SPACE  &lt 2 SPACE  &kp BACKSPACE  &kp RET  &none  &none      &none    &none                 &none
+&none      &none         &none  &none  &none         &none                                         &none    &none  &none      &none    &none                 &none
+&kp GRAVE  &kp Q         &kp W  &kp E  &kp R         &kp T                                         &kp Y    &kp U  &kp I      &kp O    &kp P                 &kp LEFT_BRACE
+&kp TAB    &kp A         &kp S  &kp D  &kp F         &kp G        &none        &none               &kp H    &kp J  &kp K      &kp L    &kp SEMI              &kp RIGHT_BRACE
+&kp LSHFT  &kp Z         &kp X  &kp C  &kp V         &kp B        &none        &kp RET             &kp N    &kp M  &kp COMMA  &kp DOT  &mt RIGHT_SHIFT FSLH  &kp BACKSLASH
+&kp LCTRL  &kp LEFT_GUI  &mo 5  &none  &kp LEFT_ALT  &lt 1 SPACE  &lt 2 SPACE  &kp BACKSPACE       &kp RET  &none  &none      &none    &none                 &none
             >;
         };
 
@@ -86,9 +101,9 @@
             bindings = <
 &none         &none   &none   &none   &none       &none                                       &none                    &none   &none   &none   &none    &none
 &kp ESCAPE    &kp F1  &kp F2  &kp F3  &kp F4      &kp F5                                      &kp F6                   &kp F7  &kp F8  &kp F9  &kp F10  &kp F11
-&kp LS(CAPS)  &trans  &trans  &trans  &trans      &trans  &none       &none                   &trans                   &trans  &trans  &trans  &trans   &kp F12
-&trans        &trans  &trans  &trans  &kp LA(F4)  &trans  &kp LS(N8)  &kp LS(N9)              &trans                   &trans  &trans  &trans  &trans   &trans
-&trans        &trans  &trans  &trans  &trans      &trans  &trans      &kp LC(LG(LEFT_ARROW))  &kp LG(LC(RIGHT_ARROW))  &none   &none   &trans  &trans   &trans
+&kp LS(CAPS)  &trans  &trans  &trans  &trans      &trans  &none        &none                  &trans                   &trans  &trans  &trans  &trans   &kp F12
+&trans        &trans  &trans  &trans  &kp LA(F4)  &trans  &kp LS(N8)   &kp LS(N9)             &trans                   &trans  &trans  &trans  &trans   &trans
+&trans        &trans  &trans  &trans  &trans      &trans  &trans       &kp LC(LG(LEFT_ARROW)) &kp LG(LC(RIGHT_ARROW))  &none   &none   &trans  &trans   &trans
             >;
         };
 
@@ -106,19 +121,22 @@
             bindings = <
 &none           &none         &none         &none         &none         &none                   &none         &none         &none         &none         &none         &none
 &kp GRAVE       &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &kp NUMBER_4  &kp N5                  &kp NUMBER_6  &kp NUMBER_7  &kp NUMBER_8  &kp NUMBER_9  &kp NUMBER_0  &trans
-&kp TAB         &none         &none         &none         &none         &none   &none   &none   &none         &none         &none         &none         &none         &trans
-&kp LEFT_SHIFT  &none         &none         &none         &none         &none   &trans  &trans  &none         &none         &none         &none         &none         &trans
-&trans          &trans        &trans        &trans        &trans        &trans  &trans  &trans  &trans        &none         &none         &trans        &trans        &trans
+&kp TAB         &none         &none         &none         &none         &none  &none   &none    &none         &none         &none         &none         &none         &trans
+&kp LEFT_SHIFT  &none         &none         &none         &none         &none  &trans  &trans   &none         &none         &none         &none         &none         &trans
+&trans          &trans        &trans        &trans        &trans        &trans &trans  &trans   &trans        &none         &none         &trans        &trans        &trans
             >;
         };
 
         layer_4 {
+            /* スクロールレイヤー（mo4l/mo4rから呼び出される） 
+               H, J, K, L あたりにスクロールを配置（お好みに合わせて変更してください）
+            */
             bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans                  &trans         &trans         &trans         &trans          &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans                  &trans         &trans         &msc SCRL_UP   &trans          &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans         &msc SCRL_LEFT &msc SCRL_DOWN &msc SCRL_RIGHT &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans         &trans         &trans         &trans          &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans         &trans         &trans         &trans          &trans  &trans
             >;
         };
 
