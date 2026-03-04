@@ -4,15 +4,13 @@
 #include <dt-bindings/zmk/pointing.h>
 
 / {
-    /* --- スクロール挙動のカスタマイズ --- */
+    /* --- マウススクロールのカスタム定義 --- */
     behaviors {
-        msc: mouse_scroll {
+        pscr: personal_scroll {
             compatible = "zmk,behavior-mouse-scroll";
             #binding-cells = <1>;
-            delay-ms = <0>;
-            /* 感度の調整: 数値を小さくするとゆっくりになります (10 -> 5)
-               方向の反転: x をマイナスにすることで、右操作で右スクロール（反転解消）にします
-            */
+            /* 感度: 数値を小さく(5)してゆっくりに設定 */
+            /* 方向: x をマイナスにして右操作で右スクロールに反転 */
             scroll-vector-x = <(-5)>; 
             scroll-vector-y = <5>;    
             time-to-max-speed-ms = <400>;
@@ -128,15 +126,13 @@
         };
 
         layer_4 {
-            /* スクロールレイヤー（mo4l/mo4rから呼び出される） 
-               H, J, K, L あたりにスクロールを配置（お好みに合わせて変更してください）
-            */
+            /* スクロールレイヤー */
             bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans                  &trans         &trans         &trans         &trans          &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans                  &trans         &trans         &msc SCRL_UP   &trans          &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans         &msc SCRL_LEFT &msc SCRL_DOWN &msc SCRL_RIGHT &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans         &trans         &trans         &trans          &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans         &trans         &trans         &trans          &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans                  &trans          &trans          &trans          &trans           &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans                  &trans          &trans          &pscr SCRL_UP   &trans           &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans          &pscr SCRL_LEFT &pscr SCRL_DOWN &pscr SCRL_RIGHT &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans          &trans          &trans          &trans           &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans          &trans          &trans          &trans           &trans  &trans
             >;
         };
 
