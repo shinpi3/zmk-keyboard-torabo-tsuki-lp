@@ -11,61 +11,73 @@
         mb1r {
             bindings = <&mkp MB1>;
             key-positions = <33 34>;
+            layers = <0>;
         };
 
         mb1l {
             bindings = <&mkp MB1>;
             key-positions = <28 27>;
+            layers = <0>;
         };
 
         mb2r {
             bindings = <&mkp MB2>;
             key-positions = <33 35>;
+            layers = <0>;
         };
 
         mb2l {
             bindings = <&mkp MB2>;
             key-positions = <28 26>;
+            layers = <0>;
         };
 
         mb3r {
             bindings = <&mkp MB3>;
             key-positions = <33 20>;
+            layers = <0>;
         };
 
         mb3l {
             bindings = <&mkp MB3>;
             key-positions = <15 28>;
+            layers = <0>;
         };
 
         mscr {
             bindings = <&mo 4>;
             key-positions = <33 34 35>;
+            layers = <0>;
         };
 
         mscl {
             bindings = <&mo 4>;
             key-positions = <27 28 26>;
+            layers = <0>;
         };
 
         ctrlwr {
             bindings = <&kp LC(W)>;
             key-positions = <46 47>;
+            layers = <0>;
         };
 
         ctrlwl {
             bindings = <&kp LC(W)>;
             key-positions = <43 42>;
+            layers = <0>;
         };
 
         mb4r {
             bindings = <&mkp MB4>;
             key-positions = <33 35 34 36>;
+            layers = <0>;
         };
 
         mb4l {
             bindings = <&mkp MB4>;
             key-positions = <28 27 26 25>;
+            layers = <0>;
         };
     };
 
