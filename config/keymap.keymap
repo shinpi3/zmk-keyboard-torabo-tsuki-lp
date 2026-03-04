@@ -8,10 +8,34 @@
     combos {
         compatible = "zmk,combos";
 
-        bt_clear {
-            bindings = <&bt BT_CLR>;
-            key-positions = <28 29>;
-            layers = <2>;
+        mb1r {
+            bindings = <&mkp MB1>;
+            key-positions = <33 34>;
+        };
+
+        mb1l {
+            bindings = <&mkp MB1>;
+            key-positions = <28 27>;
+        };
+
+        mb2r {
+            bindings = <&mkp MB2>;
+            key-positions = <33 35>;
+        };
+
+        mb2l {
+            bindings = <&mkp MB2>;
+            key-positions = <28 26>;
+        };
+
+        mb3r {
+            bindings = <&mkp MB3>;
+            key-positions = <33 20>;
+        };
+
+        mb3l {
+            bindings = <&mkp MB3>;
+            key-positions = <15 28>;
         };
     };
 
