@@ -3,16 +3,19 @@
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/pointing.h>
 
-/* --- グローバルなスクロール設定の上書き --- */
-/* ZMK Studio/Pointing環境では、直接プロパティを弄るのが最も安全です */
-&msc {
-    /* xをマイナスにして右操作＝右スクロール(反転解消) */
-    /* 数値を5にして低感度へ */
-    scroll-vector-x = <(-5)>;
-    scroll-vector-y = <5>;
-};
-
 / {
+    /* --- 独自のスクロール挙動を定義 --- */
+    behaviors {
+        // 名前を競合しにくい「my_scrl」に変更
+        my_scrl: my_scrl {
+            compatible = "zmk,behavior-pointing-scroll";
+            #binding-cells = <1>;
+            // 感度を5に落とし、横方向(x)を反転
+            scroll-vector-x = <(-5)>;
+            scroll-vector-y = <5>;
+        };
+    };
+
     combos {
         compatible = "zmk,combos";
 
@@ -122,13 +125,13 @@
         };
 
         layer_4 {
-            /* 標準の msc 命令を使用（これなら定義エラーが起きません） */
+            /* 独自定義の my_scrl を使用。定数(SCROLL_UP等)を使わず数字で指定 */
             bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans                  &trans          &trans          &trans          &trans           &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans                  &trans          &trans          &msc SCRL_UP    &trans           &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans          &msc SCRL_LEFT  &msc SCRL_DOWN  &msc SCRL_RIGHT  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans          &trans          &trans          &trans           &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans          &trans          &trans          &trans           &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans                  &trans     &trans     &trans     &trans     &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans                  &trans     &trans     &my_scrl 0 &trans     &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans     &my_scrl 2 &my_scrl 1 &my_scrl 3 &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans     &trans     &trans     &trans     &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans     &trans     &trans     &trans     &trans  &trans
             >;
         };
 
