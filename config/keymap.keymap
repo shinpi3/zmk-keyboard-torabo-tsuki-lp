@@ -3,19 +3,16 @@
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/pointing.h>
 
-/ {
-    /* --- 独自のスクロール挙動を定義 --- */
-    behaviors {
-        // 名前を競合しにくい「my_scrl」に変更
-        my_scrl: my_scrl {
-            compatible = "zmk,behavior-pointing-scroll";
-            #binding-cells = <1>;
-            // 感度を5に落とし、横方向(x)を反転
-            scroll-vector-x = <(-5)>;
-            scroll-vector-y = <5>;
-        };
-    };
+/* --- 標準のmscノードを直接上書き（これなら定義エラーが出ません） --- */
+&msc {
+    compatible = "zmk,behavior-pointing-scroll";
+    #binding-cells = <1>;
+    // 感度を5に調整、横方向(x)をマイナスにして反転解消
+    scroll-vector-x = <(-5)>;
+    scroll-vector-y = <5>;
+};
 
+/ {
     combos {
         compatible = "zmk,combos";
 
@@ -125,11 +122,11 @@
         };
 
         layer_4 {
-            /* 独自定義の my_scrl を使用。定数(SCROLL_UP等)を使わず数字で指定 */
+            /* 修正版 &msc を使用。0=UP, 1=DOWN, 2=LEFT, 3=RIGHT */
             bindings = <
 &trans  &trans  &trans  &trans  &trans  &trans                  &trans     &trans     &trans     &trans     &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans                  &trans     &trans     &my_scrl 0 &trans     &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans     &my_scrl 2 &my_scrl 1 &my_scrl 3 &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans                  &trans     &trans     &msc 0     &trans     &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans     &msc 2     &msc 1     &msc 3     &trans  &trans
 &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans     &trans     &trans     &trans     &trans  &trans
 &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans     &trans     &trans     &trans     &trans  &trans
             >;
